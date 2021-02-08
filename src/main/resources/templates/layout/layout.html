@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+<meta charset="UTF-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title th:text="${titulo}">Insert title here</title>
+
+<link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
+<link rel="stylesheet" th:href="@{/css/dataTables.bootstrap4.min.css}">
+<link rel="stylesheet" th:href="@{/css/style.css}">
+
+
+</head>
+<body>
+
+	<div th:fragment="alerts" class="fixed-top">
+		<div class="alertop alert alert-success" th:if="${success}"
+			th:text="${success}"></div>
+		<div class="alertop alert alert-danger" th:if="${error != null}"
+			th:text="${error}"></div>
+		<div class="alertop alert alert-warning" th:if="${warning != null}"
+			th:text="${warning}"></div>
+		<div class="alertop alert alert-info" th:if="${info != null}"
+			th:text="${info}"></div>
+	</div>
+
+	<footer th:fragment="footer" class="container">
+
+		<script th:src="@{/js/bootstrap.min.js}"></script>
+		<script th:src="@{/js/jquery-3.5.1.js}"></script>
+		<script th:src="@{/js/popper.min.js}"></script>
+		<script th:src="@{/js/jquery.dataTables.min.js}"></script>
+		<script th:src="@{/js/dataTables.bootstrap4.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/script.js}"></script>
+		<script th:src="@{/js/pagination.js}"></script>
+		<script type="text/javascript">
+  		
+  		$(document).ready(function(){
+  			$(".alertop").fadeTo(2000, 500).slideUp(500, function(){
+        	    $(".alert-dismissible").alert('close');
+        	    $('#no-paste').bind('copy paste cut',function(e) { 
+        	    	 e.preventDefault(); //disable cut,copy,paste
+        	    $(":input").inputmask();
+
+  		      });
+        	});
+        	});
+  		 
+	    	
+		</script>
+	</footer>
+</body>
+</html>

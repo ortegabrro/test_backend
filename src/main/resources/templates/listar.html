@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<!--Panel-->
+	<nav th:replace="layout/navbar :: panel"></nav>
+	<div class="content" th:each="factura :	${facturas}">
+		<form action="#" th:action="@{/form}" th:object="${factura}"
+			method="post">
+
+			<div class="container-fluid" id="css-contenido">
+				<div class="card border-dark bg-light" id="card-inicio">
+
+					<div class="card-header text-white">
+						<div class="d-flex">
+							<div class="mt-2 mb-2" id="card-titulo" th:text="${form}"></div>
+							<div class="ml-auto" id="pagin">
+								<ul class="pagination" id="pag-card">
+									<li class="prev page-item "><a class="page-link" href="#">Anterior</a></li>
+									<li class="next page-item"><a class="next page-link"
+										href="#">Siguiente</a></li>
+								</ul>
+							</div>
+
+						</div>
+					</div>
+
+					<div class="card-body">
+
+						<div class="form-row">
+							<div class="col-md-4">
+								<label for="cliente.id">Cedula Cliente</label> <input
+									type="text" name="cliente.id"
+									class="form-control text-uppercase"
+									th:value="${factura.cliente.id}" readonly>
+							</div>
+							<div class="col-md-4">
+								<label for="cliente.nombre">Nombre Cliente</label> <input
+									type="text" class="form-control text-uppercase"
+									name="cliente.nombre" th:value="${factura.cliente.nombre}"
+									readonly>
+							</div>
+							<div class="col-md-4">
+								<label for="cliente.direccion">Direccion Cliente</label> <input
+									type="text" class="form-control text-uppercase"
+									name="cliente.direccion"
+									th:value="${factura.cliente.direccion}" readonly>
+							</div>
+
+						</div>
+						<div class="card my-2">
+							<div class="card-body">
+								<table class="tb1 table table-bordered" style="width: 100%">
+									<thead>
+										<tr>
+											<td>Nombre</td>
+											<td>Cantidad</td>
+											<td>Valor</td>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="item: ${factura.items}">
+											<td th:text="${item.producto.nombre}"></td>
+											<td th:text="${item.cantidad}"></td>
+											<td th:text="${item.calcularImporte()}"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="row justify-content-start my-2">
+							<div class="col-1">
+								<label>Subtotal</label>
+							</div>
+							<div class="col-4">
+								<input type="text" class="form-control text-uppercase"
+									th:value="${factura.subtotal()}" readonly>
+							</div>
+						</div>
+						<div class="row justify-content-start my-2">
+							<div class="col-1">
+								<label>IVA</label>
+							</div>
+							<div class="col-4">
+								<input type="text" class="form-control text-uppercase"
+									th:value="${factura.iva}" readonly>
+							</div>
+
+						</div>
+
+						<div class="row justify-content-start my-2">
+							<div class="col-1">
+								<label>Domicilio</label>
+							</div>
+							<div class="col-4">
+								<input type="text" class="form-control text-uppercase"
+									th:value="${factura.domicilio}" readonly>
+							</div>
+						</div>
+						<div class="row justify-content-start my-2">
+							<div class="col-1">
+								<label>Total</label>
+							</div>
+							<div class="col-4">
+								<input type="text" class="form-control text-uppercase"
+									th:value="${factura.total()}" readonly>
+							</div>
+						</div>
+						<button type="submit" name="action" value="actualizar"
+							class="btn btn-secondary border-right border-dark">Actualizar</button>
+						<button type="submit" name="action" value="eliminar"
+							class="btn btn-secondary border-right border-dark">Eliminar</button>
+					</div>
+				</div>
+			</div>
+			<label for="id" hidden="true">Cedula Cliente</label> <input type="hidden"
+				name="id" class="form-control text-uppercase"
+				th:value="${factura.id}">
+				<label for="hora"
+				hidden="true">Hora Factura</label> <input type="hidden"
+				name="hora" class="form-control text-uppercase"
+				th:value="${factura.hora}">
+		</form>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

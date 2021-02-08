@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<!--Panel-->
+
+
+	<nav th:replace="layout/navbar :: panel"></nav>
+	<div class="container-fluid" id="css-contenido">
+		<div th:replace="layout/layout :: alerts"></div>
+		<form th:action="@{/form}" method="post">
+			<div class="card border-dark bg-light" id="card-inicio">
+
+				<div class="card-header text-white">
+					<div class="d-flex">
+						<div class="mt-2 mb-2" id="card-titulo" th:text="${form}"></div>
+					</div>
+				</div>
+				<div class="card-body">
+					<div class="form-row">
+						<th:block th:if="${boton} eq 'guardar'">
+							<div class="col-md-4">
+								<label for="cliente.id">Cedula Cliente</label> <input
+									type="text" name="cliente.id"
+									class="form-control text-uppercase"
+									th:field="*{factura.cliente.id}">
+							</div>
+
+							<div class="col-md-4">
+								<label for="cliente.nombre">Nombre Cliente</label> <input
+									type="text" name="cliente.nombre"
+									class="form-control text-uppercase"
+									th:field="*{factura.cliente.nombre}">
+							</div>
+							<div class="col-md-4">
+								<label for="cliente.direccion">Direccion Cliente</label> <input
+									type="text" class="form-control text-uppercase"
+									name="cliente.direccion"
+									th:field="*{factura.cliente.direccion}">
+							</div>
+						</th:block>
+						<th:block th:if="${boton} eq 'actualizar'">
+							<div class="col-md-4">
+								<label for="cliente.id">Cedula Cliente</label> <input
+									type="text" name="cliente.id"
+									class="form-control text-uppercase"
+									th:field="*{factura.cliente.id}" readonly>
+							</div>
+
+							<div class="col-md-4">
+								<label for="cliente.nombre">Nombre Cliente</label> <input
+									type="text" name="cliente.nombre"
+									class="form-control text-uppercase"
+									th:field="*{factura.cliente.nombre}" readonly>
+							</div>
+							<div class="col-md-4">
+								<label for="cliente.direccion">Direccion Cliente</label> <input
+									type="text" class="form-control text-uppercase"
+									name="cliente.direccion"
+									th:field="*{factura.cliente.direccion}" readonly>
+							</div>
+						</th:block>
+					</div>
+					<div class="form-row"></div>
+					<div class="card my-2" id="card-registrar">
+						<div class="card-body">
+							<p class="card-text">Seleccionar productos</p>
+
+							<table class="table table-bordered" style="width: 100%">
+								<thead>
+									<tr>
+										<td>Nombre</td>
+										<td>Valor</td>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="producto: ${productos}">
+										<td>
+											<div class="form-check">
+												<input type="checkbox" th:value="${producto.id}"
+													name="selects[]"> <label
+													th:text="${producto.nombre}"></label>
+											</div>
+										</td>
+										<td th:text="${producto.valor}"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<th:block th:switch="${boton}">
+						<th:block th:case="guardar">
+							<button type="submit" name="action" value="guardar"
+								class="btn btn-secondary border-right border-dark">Guardar</button>
+						</th:block>
+						<th:block th:case="actualizar">
+							<button type="submit" name="action" value="update"
+								class="btn btn-secondary border-right border-dark">Actualizar</button>
+						</th:block>
+					</th:block>
+				</div>
+			</div>
+			<label for="factura.id" hidden="true">Cedula Cliente</label> <input
+				type="hidden" name="factura.id" class="form-control text-uppercase"
+				th:field="*{factura.id}"> 
+			<label for="factura.hora"
+				hidden="true">Hora Factura</label> <input type="hidden"
+				name="factura.hora" class="form-control text-uppercase"
+				th:field="*{factura.hora}">
+		</form>
+	</div>
+
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

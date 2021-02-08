@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+	<nav class="navbar navbar-expand-md navbar-dark" id="css-panel"
+		th:fragment="panel">
+
+		<div class="collapse navbar-collapse" id="css-menu">
+			<ul class="nav navbar-nav mr-auto">
+				<li class="nav-item" id="css-lista">
+					<div class="btn-group" role="group" aria-label="Basic example">
+
+						<a class="btn btn-primary border-right border-dark"
+							th:href="@{'/'}"> Inicio</a> <a
+							class="btn btn-primary border-right border-dark"
+							th:href="@{'/facturas'}"> Facturas</a>
+						<!-- 
+						<button type="submit" name="action" value="cargar"
+							class="btn btn-primary border-right border-dark">Inicio</button>
+						<a class="btn btn-primary border-right border-dark"
+							th:href="@{'/main'}"> Listar</a>-->
+
+
+					</div>
+				</li>
+			</ul>
+		</div>
+	</nav>
+</body>
+</html>
